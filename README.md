@@ -1,8 +1,9 @@
-# 삼성전자 종가 범위 예측 시스템
+# Stock Range Predictor
 
 ## 📊 프로젝트 개요
 
-이 프로젝트는 한국 주식 시장의 삼성전자(종목코드: 005930)의 **다음 거래일 종가 범위(low, mid, high)**를 기계학습을 통해 예측하는 시스템입니다.
+이 프로젝트는 한국 주식 시장의 **다음 거래일 종가 범위(low, mid, high)**를 기계학습을 통해 예측하는 시스템입니다.
+삼성전자(005930), SK하이닉스(000660), 한화에어로스페이스(012450) 등 **다양한 종목**을 지원합니다.
 
 ### 핵심 목표
 
@@ -42,8 +43,8 @@
 ### 1. 저장소 클론 또는 다운로드
 
 ```bash
-# 또는 수동으로 파일 다운로드
-cd samsung_range_predictor
+git clone https://github.com/yourusername/stock-range-predictor.git
+cd stock-range-predictor
 ```
 
 ### 2. Python 환경 설정 (Python 3.11 권장)
@@ -100,8 +101,10 @@ python run.py --mode full
 # 특정 기간의 데이터로 학습
 python run.py --mode train --start 2020-01-01 --end 2024-12-31
 
-# 다른 종목 예측 (모듈 수정 필요)
-python run.py --mode predict --ticker 000660
+# 다른 종목으로 실행
+python run.py --mode train --ticker 000660           # SK하이닉스 학습
+python run.py --mode full --ticker 012450            # 한화에어로스페이스 전체 파이프라인
+python run.py --mode predict --ticker 051910         # 원하는 종목 예측
 ```
 
 ### 출력 파일
@@ -128,7 +131,7 @@ outputs/
 ## 📁 파일 구조 설명
 
 ```
-samsung_range_predictor/
+stock-range-predictor/
 ├─ app/
 │  ├─ __init__.py                 # 패키지 초기화
 │  ├─ config.py                   # 설정 및 상수 (모든 파라미터 관리)
@@ -157,7 +160,9 @@ samsung_range_predictor/
 
 ```python
 from pykrx import stock
-df = stock.get_market_ohlcv('2024-01-01', '2024-12-31', '005930')
+df = stock.get_market_ohlcv('2024-01-01', '2024-12-31', '005930')  # 삼성전자
+# 또는
+df = stock.get_market_ohlcv('2024-01-01', '2024-12-31', '000660')  # SK하이닉스
 ```
 
 **pykrx 특징:**
@@ -171,7 +176,9 @@ pykrx 실패 시 자동으로 yfinance로 전환:
 
 ```python
 import yfinance as yf
-df = yf.download('005930.KS', start='2024-01-01', end='2024-12-31')
+df = yf.download('005930.KS', start='2024-01-01', end='2024-12-31')  # 삼성전자
+# 또는
+df = yf.download('000660.KS', start='2024-01-01', end='2024-12-31')  # SK하이닉스
 ```
 
 **데이터 항목:**
@@ -424,11 +431,13 @@ Directional Accuracy = 상승/하락 판단 정확도
 ## 🔮 향후 확장 아이디어
 
 ### 1. 데이터 확장
-- [ ] 코스피 지수 통합
+- [ ] 포트폴리오: 여러 종목 동시 추적
+- [ ] 코스피/코스닥 지수 통합
 - [ ] 환율(USD/KRW) 영향도
-- [ ] 외국인/기관 순매수
+- [ ] 외국인/기관 순매수 (주중심)
 - [ ] 미국 반도체 지수(SOX)
 - [ ] VIX 공포 지수
+- [ ] 업종별 상대 강도(Relative Strength)
 
 ### 2. 모델 고도화
 - [ ] LSTM/GRU 시계열 모델
@@ -487,9 +496,14 @@ Directional Accuracy = 상승/하락 판단 정확도
 오류: "모델 파일을 찾을 수 없습니다"
 
 해결책:
-1. 먼저 학습 모드 실행: python run.py --mode train
+1. 먼저 학습 모드 실행: python run.py --mode train --ticker 005930
 2. models/ 디렉토리 확인
 3. 모델 파일 존재 확인:
+   - models/{TICKER}_model_q10.pkl
+   - models/{TICKER}_model_q50.pkl
+   - models/{TICKER}_model_q90.pkl
+
+   예: 삼성전자(005930)인 경우
    - models/005930_model_q10.pkl
    - models/005930_model_q50.pkl
    - models/005930_model_q90.pkl
@@ -566,4 +580,5 @@ Happy Learning! 🚀
 
 **최종 수정**: 2026-03-09
 **버전**: 1.0.0
-**개발자**: Quantitative Finance Team
+**프로젝트**: Stock Range Predictor
+**지원 종목**: 한국 주식 전체 (pykrx 지원 종목)

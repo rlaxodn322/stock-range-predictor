@@ -2,19 +2,19 @@
   "ticker": "005930",
   "prediction_for_next_trading_day": "2026-03-10",
   "today_date": "2026-03-06",
-  "today_close": 188200,
+  "today_close": 1481000,
   "predicted_return_quantiles": {
-    "q10": -0.0029158701160886657,
-    "q50": -0.0029158701160886657,
-    "q90": -0.0029158701160886657
+    "q10": -0.0004546942208418555,
+    "q50": -0.0004546942208418555,
+    "q90": -0.0004546942208418555
   },
   "predicted_close_range": {
-    "low": 187651,
-    "mid": 187651,
-    "high": 187651
+    "low": 1480327,
+    "mid": 1480327,
+    "high": 1480327
   },
   "range_width": 0,
   "range_width_pct": 0.0,
   "signal": "BEARISH",
-  "timestamp": "2026-03-09T08:46:52.200079"
+  "timestamp": "2026-03-09T08:52:44.400116"
 }
