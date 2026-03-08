@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m pip install --upgrade pip setuptools wheel)",
+      "Bash(python -m pip install -r requirements.txt)",
+      "Bash(python -m pip install --no-build-isolation -r requirements.txt)",
+      "Bash(python -m pip install numpy==1.24.3)",
+      "Bash(python -m pip install --only-binary :all: pandas numpy matplotlib scikit-learn lightgbm joblib requests python-dateutil)"
+    ]
+  }
+}

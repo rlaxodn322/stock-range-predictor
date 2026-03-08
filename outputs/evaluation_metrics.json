@@ -1,0 +1,16 @@
+{
+  "metrics": {
+    "mae_q50": 0.01802019254112899,
+    "rmse_q50": 0.025331438283121312,
+    "mape_q50": 1.004315483352615,
+    "smape_q50": 3.5747273370925723,
+    "coverage_rate": 0.0,
+    "range_width": 0.0,
+    "range_width_pct": 0.0,
+    "directional_accuracy": 0.47045454545454546
+  },
+  "warnings": [
+    "⚠ Coverage가 낮습니다: 0.0% (목표: 90.0%)"
+  ],
+  "timestamp": "2026-03-09T08:47:14.696269"
+}
