@@ -43,7 +43,7 @@
 ### 1. 저장소 클론 또는 다운로드
 
 ```bash
-git clone https://github.com/yourusername/stock-range-predictor.git
+git clone https://github.com/rlaxodn322/stock-range-predictor.git
 cd stock-range-predictor
 ```
 
